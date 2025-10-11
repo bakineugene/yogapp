@@ -18,7 +18,7 @@ QPixmap ResizeImgToFit(const QPixmap &image, int window_width, int window_height
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui_(new Ui::MainWindow) {
     ui_->setupUi(this);
 
-    SetDirectory(":/cats/images");
+    SetDirectory(":/yoga/images/poses");
 }
 
 MainWindow::~MainWindow() {
@@ -62,7 +62,7 @@ void MainWindow::resizeEvent(QResizeEvent*) {
 
 void MainWindow::UpdateEnabled() {
     ui_->btn_left->setEnabled(current_file_index_ > 0);
-    ui_->btn_right->setEnabled(current_file_index_ < files_list_.size() - 1);
+    ui_->btn_right->setEnabled(current_file_index_ + 1 < (size_t) files_list_.size());
 }
 
 void MainWindow::on_btn_right_clicked() {

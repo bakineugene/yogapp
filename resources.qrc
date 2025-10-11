@@ -1,7 +1,55 @@
 <RCC>
-    <qresource prefix="/buttons">
-        <file>images/chevron_l.png</file>
-        <file>images/chevron_r.png</file>
+    <qresource prefix="/icons">
+        <file>icons/chevron_r.png</file>
+        <file>icons/chevron_l.png</file>
     </qresource>
-    <qresource prefix="/yoga"/>
+    <qresource prefix="/images">
+        <file>images/cat_cow.jpeg</file>
+        <file>images/extended_mountain.jpeg</file>
+        <file>images/mountain.jpeg</file>
+        <file>images/bound_angle.jpeg</file>
+        <file>images/down_dog.jpeg</file>
+        <file>images/seated_twists.jpeg</file>
+        <file>images/reclined_twists.jpeg</file>
+        <file>images/corpse.jpeg</file>
+        <file>images/easy_pose.jpeg</file>
+        <file>images/plank.jpeg</file>
+        <file>images/chair.jpeg</file>
+        <file>images/warrior_1.jpeg</file>
+        <file>images/cobra.jpeg</file>
+        <file>images/four_limbed_staff.jpeg</file>
+        <file>images/forward_fold.jpeg</file>
+        <file>images/low_lunge.jpeg</file>
+        <file>images/warrior_2.jpeg</file>
+        <file>images/down_dog_split.jpeg</file>
+        <file>images/up_dog.jpeg</file>
+        <file>images/sphinx.jpeg</file>
+        <file>images/half_forward_fold.jpeg</file>
+    </qresource>
+    <qresource prefix="/sounds">
+        <file>sounds/corpse_2.mp3</file>
+        <file>sounds/warrior_2.mp3</file>
+        <file>sounds/crescent.mp3</file>
+        <file>sounds/down_dog_split.mp3</file>
+        <file>sounds/chair.mp3</file>
+        <file>sounds/warrior_1.mp3</file>
+        <file>sounds/up_dog.mp3</file>
+        <file>sounds/cobra.mp3</file>
+        <file>sounds/four_limbed_staff.mp3</file>
+        <file>sounds/plank.mp3</file>
+        <file>sounds/half_forward_fold.mp3</file>
+        <file>sounds/standing_forward_fold.mp3</file>
+        <file>sounds/extended_mountain.mp3</file>
+        <file>sounds/mountain.mp3</file>
+        <file>sounds/down_dog.mp3</file>
+        <file>sounds/reclined_twists.mp3</file>
+        <file>sounds/corpse.mp3</file>
+        <file>sounds/child.mp3</file>
+        <file>sounds/sphinx.mp3</file>
+        <file>sounds/low_lunge.mp3</file>
+        <file>sounds/cat_cow.mp3</file>
+        <file>sounds/bound_angle_pose.mp3</file>
+        <file>sounds/seated_twists.mp3</file>
+        <file>sounds/easy_pose.mp3</file>
+    </qresource>
 </RCC>

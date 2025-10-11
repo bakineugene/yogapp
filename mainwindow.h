@@ -49,7 +49,7 @@ private:
     Ui::MainWindow *ui_;
     QLabel picture_label_{this};
     QPixmap active_pixmap_;
-    QTimer timer{this};
+    QTimer timer_{this};
 
 };
 #endif // MAINWINDOW_H
