@@ -1,8 +1,4 @@
 <RCC>
-    <qresource prefix="/icons">
-        <file>icons/chevron_r.png</file>
-        <file>icons/chevron_l.png</file>
-    </qresource>
     <qresource prefix="/images">
         <file>images/cat_cow.jpeg</file>
         <file>images/extended_mountain.jpeg</file>

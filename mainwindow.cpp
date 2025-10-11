@@ -18,7 +18,7 @@ QPixmap ResizeImgToFit(const QPixmap &image, int window_width, int window_height
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui_(new Ui::MainWindow) {
     ui_->setupUi(this);
 
-    SetDirectory(":/yoga/images/poses");
+    SetDirectory(":/images/images");
 }
 
 MainWindow::~MainWindow() {
