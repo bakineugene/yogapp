@@ -7,7 +7,8 @@ SOURCES += \
     mainwindow.cpp
 
 HEADERS += \
-    mainwindow.h
+    mainwindow.h \
+    yogasequence.h
 
 FORMS += \
     mainwindow.ui

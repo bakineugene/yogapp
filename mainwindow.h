@@ -12,6 +12,8 @@
 #include <QList>
 #include <QPixmap>
 
+#include "yogasequence.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -43,7 +45,7 @@ private:
     void resizeEvent(QResizeEvent *event) override;
     void UpdateEnabled();
     void NextPose();
-    void RunPose();
+    void RunPose(const YogaPose&);
 
 private:
     Ui::MainWindow *ui_;
@@ -54,8 +56,7 @@ private:
     QMediaPlayer player_{};
     QAudioOutput audio_output_;
 
-    QList<QPair<QString, int>> yoga_sequence_{};
-    QList<QPair<QString, int>>::iterator current_pose_{};
+    YogaSequence yoga_sequence_;
 
 
 };

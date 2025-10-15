@@ -24,29 +24,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui_(new Ui::MainW
     connect(&player_, &QMediaPlayer::mediaStatusChanged,
             this, &MainWindow::OnPlayerFinish);
 
-    yoga_sequence_ = {
-        QPair<QString, int>("mountain", 3000),
-        QPair<QString, int>("extended_mountain", 3000),
-        QPair<QString, int>("half_forward_fold", 3000),
-        QPair<QString, int>("forward_fold", 3000),
-        QPair<QString, int>("four_limbed_staff", 3000),
-        QPair<QString, int>("up_dog", 3000),
-        QPair<QString, int>("down_dog", 5000),
-        QPair<QString, int>("low_lunge", 3000),
-        QPair<QString, int>("four_limbed_staff", 2000),
-        QPair<QString, int>("up_dog", 3000),
-        QPair<QString, int>("down_dog", 5000),
-        QPair<QString, int>("low_lunge", 3000),
-        QPair<QString, int>("four_limbed_staff", 2000),
-        QPair<QString, int>("up_dog", 3000),
-        QPair<QString, int>("down_dog", 3000),
-        QPair<QString, int>("forward_fold", 3000),
-        QPair<QString, int>("extended_mountain", 3000),
-        QPair<QString, int>("mountain", 3000)
-    };
+    yoga_sequence_ = YogaSequence([this](YogaPose pose){this->RunPose(pose);});
 
-    current_pose_ = yoga_sequence_.begin();
-    RunPose();
+    yoga_sequence_.StartMorningSalutation();
 }
 
 MainWindow::~MainWindow() {
@@ -54,9 +34,10 @@ MainWindow::~MainWindow() {
 }
 
 QPixmap MainWindow::GetCurrentFile() {
-    if (current_pose_ == yoga_sequence_.end()) return QPixmap{};
+    if (!yoga_sequence_.IsInProgress()) return QPixmap{};
+    YogaPose pose = yoga_sequence_.GetCurrent();
 
-    auto path = ":/images/images/" + current_pose_->first + ".jpeg";
+    auto path = QString{":/images/images/%1.jpeg"}.arg(pose.first.c_str());
     return QPixmap{path};
 }
 
@@ -74,51 +55,40 @@ void MainWindow::resizeEvent(QResizeEvent*) {
 }
 
 void MainWindow::OnTimer() {
-    NextPose();
+    yoga_sequence_.OnTimer();
 }
 
 void MainWindow::OnPlayerFinish(QMediaPlayer::MediaStatus status) {
     if (status == QMediaPlayer::EndOfMedia) {
-        NextPose();
+        yoga_sequence_.OnAudioFinished();
     }
 }
 
 void MainWindow::NextPose() {
-    if (current_pose_ != yoga_sequence_.end()) {
-        ++current_pose_;
-    }
-    RunPose();
+    yoga_sequence_.Next();
 }
 
-void MainWindow::RunPose() {
-    if (current_pose_ != yoga_sequence_.end()) {
-        player_.setSource(QUrl{"qrc:/sounds/sounds/" + current_pose_->first + ".mp3"});
-        UpdateImage();
-        UpdateEnabled();
+void MainWindow::RunPose(const YogaPose& pose) {
+    auto path = QString{"qrc:/sounds/sounds/%1.mp3"}.arg(pose.first.c_str());
+    player_.setSource(QUrl{path});
+    UpdateImage();
+    UpdateEnabled();
 
-        // TODO: somehow compose timer and player
-        // timer_.setInterval(current_pose_->second);
-        // timer_.start();
+    timer_.setInterval(pose.second);
+    timer_.start();
 
-        player_.play();
-    }
+    player_.play();
 }
 
 void MainWindow::UpdateEnabled() {
-    ui_->btn_left->setEnabled(current_pose_ != yoga_sequence_.begin());
-    ui_->btn_right->setEnabled(current_pose_ + 1 != yoga_sequence_.end());
+    ui_->btn_left->setEnabled(yoga_sequence_.HasPrevious());
+    ui_->btn_right->setEnabled(yoga_sequence_.HasNext());
 }
 
 void MainWindow::on_btn_right_clicked() {
-    if (current_pose_ != yoga_sequence_.end()){
-        ++current_pose_;
-        RunPose();
-    }
+    yoga_sequence_.Next();
 }
 
 void MainWindow::on_btn_left_clicked() {
-    if (current_pose_ != yoga_sequence_.begin()){
-        --current_pose_;
-        RunPose();
-    }
+    yoga_sequence_.Previous();
 }
